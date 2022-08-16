@@ -5,6 +5,7 @@ import process from "process";
 
 const IDENTITY_TOKEN = process.env.IDENTITY_TOKEN;
 const AUTH_PROXY_URL = process.env.AUTH_PROXY_URL || 'http://localhost:8080';
+const INTERVAL = parseInt(process.env.INTERVAL) || 10;
 
 if (IDENTITY_TOKEN == undefined) {
   throw new Error('IDENTITY_TOKEN is undefined');
@@ -22,7 +23,7 @@ logger.log('starting');
 
 (async () => {
   runTestOnce();
-  setInterval(runTestOnce, 10000);
+  setInterval(runTestOnce, INTERVAL * 1000);
   setupShutdown();
 })();
 
