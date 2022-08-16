@@ -1,6 +1,7 @@
 import axios, { Axios } from 'axios';
 import { logger } from './logger';
 import { v4 as uuidv4 } from 'uuid';
+import process from "process";
 
 const IDENTITY_TOKEN = process.env.IDENTITY_TOKEN;
 const AUTH_PROXY_URL = process.env.AUTH_PROXY_URL || 'http://localhost:8080';
@@ -22,6 +23,7 @@ logger.log('starting');
 (async () => {
   runTestOnce();
   setInterval(runTestOnce, 10000);
+  setupShutdown();
 })();
 
 async function runTestOnce() {
@@ -60,4 +62,22 @@ async function runTestOnce() {
       logger.log(`[${requestId}] [ERROR] ${err} ${elapsed}ms`);
     }
   }
+}
+
+function setupShutdown() {
+  const signals: Record<string, number> = {
+    SIGHUP: 1,
+    SIGINT: 2,
+    SIGTERM: 15,
+  };
+
+  let counter = 0;
+
+  Object.keys(signals).forEach((signal) => {
+    process.on(signal, () => {
+      logger.log(`process received a ${signal} (${signals[signal]}) signal`);
+      process.on('exit', (code) => logger.log(`exiting with code ${code}`));
+      process.exit(signals[signal] + 128);
+    });
+  });
 }
