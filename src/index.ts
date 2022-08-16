@@ -32,7 +32,7 @@ async function runTestOnce() {
   const start: number = Date.now();
 
   try {
-    logger.log(`[${requestId}] starting`);
+    logger.log(`[${requestId}] starting request`);
 
     const result = await axiosInstance.post(
       'auth/login',
