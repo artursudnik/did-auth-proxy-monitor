@@ -3,13 +3,14 @@ import { logger } from './logger';
 import { v4 as uuidv4 } from 'uuid';
 
 const IDENTITY_TOKEN = process.env.IDENTITY_TOKEN;
+const AUTH_PROXY_URL = process.env.AUTH_PROXY_URL || 'http://localhost:8080';
 
 if (IDENTITY_TOKEN == undefined) {
   throw new Error('IDENTITY_TOKEN is undefined');
 }
 
 const axiosInstance: Axios = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: AUTH_PROXY_URL,
   validateStatus: (status) => {
     return status >= 200 && status < 300;
   },
