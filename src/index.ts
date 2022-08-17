@@ -2,6 +2,7 @@ import axios, { Axios } from 'axios';
 import { logger } from './logger';
 import { v4 as uuidv4 } from 'uuid';
 import process from "process";
+import { setTimeout } from 'timers/promises'
 
 const IDENTITY_TOKEN = process.env.IDENTITY_TOKEN;
 const AUTH_PROXY_URL = process.env.AUTH_PROXY_URL || 'http://localhost:8080';
@@ -22,6 +23,7 @@ const axiosInstance: Axios = axios.create({
 logger.log('starting');
 
 (async () => {
+  await setTimeout(5000);
   runTestOnce();
   setInterval(runTestOnce, INTERVAL * 1000);
   setupShutdown();
