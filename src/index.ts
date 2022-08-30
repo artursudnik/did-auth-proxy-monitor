@@ -23,7 +23,7 @@ const axiosInstance: Axios = axios.create({
 logger.log('starting');
 
 (async () => {
-  await setTimeout(5000);
+  await setTimeout(parseInt(process.env.INITIAL_DELAY) * 1000 || 5000);
   runTestOnce();
   setInterval(runTestOnce, INTERVAL * 1000);
   setupShutdown();
