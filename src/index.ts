@@ -43,7 +43,7 @@ async function runTestOnce() {
       },
       {
         headers: {
-          'x-requestid': requestId,
+          'x-request-id': requestId,
         },
       },
     );
