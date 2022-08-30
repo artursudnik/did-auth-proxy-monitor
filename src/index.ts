@@ -1,8 +1,8 @@
 import axios, { Axios } from 'axios';
 import { logger } from './logger';
 import { v4 as uuidv4 } from 'uuid';
-import process from "process";
-import { setTimeout } from 'timers/promises'
+import process from 'process';
+import { setTimeout } from 'timers/promises';
 
 const IDENTITY_TOKEN = process.env.IDENTITY_TOKEN;
 const AUTH_PROXY_URL = process.env.AUTH_PROXY_URL || 'http://localhost:8080';
@@ -73,8 +73,6 @@ function setupShutdown() {
     SIGINT: 2,
     SIGTERM: 15,
   };
-
-  let counter = 0;
 
   Object.keys(signals).forEach((signal) => {
     process.on(signal, () => {
