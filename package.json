@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "prepare": "husky install",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint --fix ./src/**",
     "clean": "rimraf ./dist ./node_modules",
