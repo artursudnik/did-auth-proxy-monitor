@@ -35,7 +35,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "uuid": "^8.3.2",
-    "yn": "^4.0.0"
+    "yn": "^5.0.0"
   },
   "lint-staged": {
     "*.ts": "eslint --cache --fix --cache-location ./node_modules/.cache/.eslintcache"
